@@ -1,4 +1,4 @@
-class X8664PcElfBinutils < Formula
+class X8664ElfBinutils < Formula
   desc "FSF Binutils for cross-compiling x86_64-elf"
   homepage "https://www.gnu.org/software/binutils/binutils.html"
   url "https://ftpmirror.gnu.org/binutils/binutils-2.32.tar.gz"
