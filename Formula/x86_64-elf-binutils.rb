@@ -1,10 +1,10 @@
 class X8664PcElfBinutils < Formula
-  desc "FSF Binutils for cross-compiling x86_64-pc-elf"
+  desc "FSF Binutils for cross-compiling x86_64-elf"
   homepage "https://www.gnu.org/software/binutils/binutils.html"
-  url "https://ftpmirror.gnu.org/binutils/binutils-2.25.tar.gz"
-  mirror "https://ftp.gnu.org/gnu/binutils/binutils-2.25.tar.gz"
-  version "2.25"
-  sha256 "cccf377168b41a52a76f46df18feb8f7285654b3c1bd69fc8265cb0fc6902f2d"
+  url "https://ftpmirror.gnu.org/binutils/binutils-2.32.tar.gz"
+  mirror "https://ftp.gnu.org/gnu/binutils/binutils-2.32.tar.gz"
+  version "2.32"
+  sha256 "9b0d97b3d30df184d302bced12f976aa1e5fbf4b0be696cdebc6cca30411a46e"
 
   # Build-only dependencies
   depends_on "autoconf" => :build
@@ -12,7 +12,7 @@ class X8664PcElfBinutils < Formula
 
   def install
     mkdir "build" do
-      system "../configure", "--target=x86_64-pc-elf",
+      system "../configure", "--target=x86_64-elf",
                              "--prefix=#{prefix}",
                              "--infodir=#{info}",
                              "--mandir=#{man}",
