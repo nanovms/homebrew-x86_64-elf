@@ -1,5 +1,5 @@
-class X8664PcElfGcc < Formula
-  desc "The GNU Compiler Collection for cross-compiling to x86_64-pc-elf"
+class X8664ElfGcc < Formula
+  desc "The GNU Compiler Collection for cross-compiling to x86_64-elf"
   homepage "https://gcc.gnu.org"
   url "https://ftpmirror.gnu.org/gcc/gcc-5.4.0/gcc-5.4.0.tar.bz2"
   mirror "https://ftp.gnu.org/gnu/gcc/gcc-5.4.0/gcc-5.4.0.tar.bz2"
@@ -11,7 +11,7 @@ class X8664PcElfGcc < Formula
   depends_on "libmpc"
   depends_on "mpfr"
 
-  depends_on "x86_64-pc-elf-binutils"
+  depends_on "x86_64-elf-binutils"
 
   # Build-only dependencies
   depends_on "autoconf" => :build
@@ -22,12 +22,12 @@ class X8664PcElfGcc < Formula
     # The C compiler is always built, C++ can be disabled
     languages = %w[c]
     languages << "c++" if build.with? "cxx"
-    binutils = Formula["x86_64-pc-elf-binutils"]
+    binutils = Formula["x86_64-elf-binutils"]
 
     ENV['PATH'] += ":#{binutils.prefix/"bin"}"
 
     mkdir "build" do
-      system "../configure", "--target=x86_64-pc-elf",
+      system "../configure", "--target=x86_64-elf",
                              "--prefix=#{prefix}",
                              "--enable-languages=#{languages.join(",")}",
 
@@ -39,8 +39,8 @@ class X8664PcElfGcc < Formula
                              # link as and ld from cross-compiled binutils
                              "--with-gnu-as",
                              "--with-gnu-ld",
-                             "--with-ld=#{binutils.opt_bin/"x86_64-pc-elf-ld"}",
-                             "--with-as=#{binutils.opt_bin/"x86_64-pc-elf-as"}",
+                             "--with-ld=#{binutils.opt_bin/"x86_64-elf-ld"}",
+                             "--with-as=#{binutils.opt_bin/"x86_64-elf-as"}",
 
                              "--with-gmp=#{Formula["gmp"].opt_prefix}",
                              "--with-mpfr=#{Formula["mpfr"].opt_prefix}",
@@ -49,7 +49,7 @@ class X8664PcElfGcc < Formula
       ENV.deparallelize
       system "make", "all-gcc"
       system "make", "all-target-libgcc"
-      FileUtils.ln_sf binutils.prefix/"x86_64-pc-elf", prefix/"x86_64-pc-elf"
+      FileUtils.ln_sf binutils.prefix/"x86_64-elf", prefix/"x86_64-elf"
       system "make", "install-gcc"
       system "make", "install-target-libgcc"
     end
@@ -65,6 +65,6 @@ class X8664PcElfGcc < Formula
           return 0;
       }
       EOS
-    system "#{bin}/x86_64-pc-elf-gcc", (testpath/"hello.c")
+    system "#{bin}/x86_64-elf-gcc", (testpath/"hello.c")
   end
 end
