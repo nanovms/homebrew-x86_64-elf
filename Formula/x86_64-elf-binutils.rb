@@ -13,6 +13,7 @@ class X8664ElfBinutils < Formula
   def install
     mkdir "build" do
       system "../configure", "--target=x86_64-elf",
+                             "--enable-targets=x86_64-elf,x86_64-pe",
                              "--prefix=#{prefix}",
                              "--infodir=#{info}",
                              "--mandir=#{man}",
